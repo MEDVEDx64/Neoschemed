@@ -38,15 +38,15 @@ namespace Neoschemed
 				var aliasStr = "";
 				foreach(var alias in handler.Aliases)
                 {
-					aliasStr += (alias + ", ");
+					aliasStr += (alias + " | ");
                 }
 
 				if(aliasStr.Length > 0)
                 {
-					aliasStr = aliasStr.Substring(0, aliasStr.Length - 2);
+					aliasStr = aliasStr[0..^3];
                 }
 
-				Console.WriteLine("    " + aliasStr + " - " + handler.Description);
+				Console.WriteLine("    " + aliasStr + "\t[value] - " + handler.Description);
             }
 		}
 

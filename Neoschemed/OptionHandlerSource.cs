@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Neoschemed
 {
-	public class OptionHandlerSource
+	public partial class OptionHandlerSource
 	{
 		private Scheme scheme;
 		private List<OptionHandler> handlers = new List<OptionHandler>();
@@ -29,11 +29,6 @@ namespace Neoschemed
 				return false;
 
 			throw new ArgumentException("Boolean parameter must have value of 0, 1, false or true");
-        }
-
-		void CreateHandlers()
-        {
-			handlers.Add(new OptionHandler("Aqua Sheep", new string[] { "--aquasheep", "-as" }, (raw) => { scheme.AquaSheep = ParseBooleanValue(raw); }));
         }
 
 		public OptionHandler Find(string alias)
