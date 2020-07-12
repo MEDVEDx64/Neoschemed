@@ -16,6 +16,11 @@ namespace Neoschemed
 			CreateHandlers();
         }
 
+		public IEnumerable<OptionHandler> Handlers
+        {
+			get => handlers;
+        }
+
 		bool ParseBooleanValue(string raw)
         {
 			if(raw == "1" || raw.ToLower() == "true")

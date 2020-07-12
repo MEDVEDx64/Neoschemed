@@ -18,6 +18,11 @@ namespace Neoschemed
 			this.setter = setter;
 		}
 
+		public string Description
+        {
+			get => description;
+        }
+
 		public IEnumerable<string> Aliases
         {
 			get => aliases;

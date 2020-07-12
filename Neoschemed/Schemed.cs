@@ -25,6 +25,29 @@ namespace Neoschemed
 
 		void PrintHelp()
 		{
+			Console.Write("This is Neoschemed, a console interface for editing Worms Armageddon version 3 schemes.\n"
+				+ "  usage: Neoschemed.exe [options]\n\n"
+				+ "Essential options:\n"
+				+ "    -i [file] - Load scheme from file;\n"
+				+ "    -o [file] - File where the scheme will be saved. If not set, the input scheme will be overwritten;\n"
+				+ "    -v [format_version] - Enforce a scheme to be saved in older format (default behavior is to upconvert schemes to version 3);\n\n"
+				+ "Scheme options:\n");
+
+			foreach(var handler in optSource.Handlers)
+            {
+				var aliasStr = "";
+				foreach(var alias in handler.Aliases)
+                {
+					aliasStr += (alias + ", ");
+                }
+
+				if(aliasStr.Length > 0)
+                {
+					aliasStr = aliasStr.Substring(0, aliasStr.Length - 2);
+                }
+
+				Console.WriteLine("    " + aliasStr + " - " + handler.Description);
+            }
 		}
 
 		public void HandleArgs(string[] args)
@@ -112,7 +135,8 @@ namespace Neoschemed
 		{
 			if (srcFile == null && dstFile == null)
 			{
-				Console.WriteLine("You must specify at least source or destination scheme file, using -i nor -o keys relatively.");
+				Console.WriteLine("You must specify at least source or destination scheme file, using -i nor -o keys relatively. " +
+					"Pass \"-h\" (or \"--help\") parameter to learn more.");
 				return;
 			}
 
