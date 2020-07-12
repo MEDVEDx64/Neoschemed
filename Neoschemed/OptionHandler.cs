@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 
 namespace Neoschemed
 {
-	public class OptionHandler
+	public class OptionHandler : IEquatable<OptionHandler>
 	{
 		string[] aliases;
 		Action<string> setter;
@@ -19,7 +21,12 @@ namespace Neoschemed
 			get => aliases;
         }
 
-		public void SetValue(string rawValue)
+        public bool Equals([AllowNull] OptionHandler other)
+        {
+			return Enumerable.SequenceEqual(aliases, other.aliases);
+        }
+
+        public void SetValue(string rawValue)
         {
 			setter(rawValue);
         }

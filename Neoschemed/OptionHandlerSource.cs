@@ -1,6 +1,7 @@
 ﻿using Syroot.Worms.Armageddon;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Neoschemed
 {
@@ -32,7 +33,13 @@ namespace Neoschemed
 
 		public OptionHandler Find(string alias)
         {
-			throw new NotImplementedException();
+			foreach(var h in handlers)
+            {
+				if(h.Aliases.Contains(alias))
+					return h;
+            }
+
+			return null;
         }
 	}
 }
