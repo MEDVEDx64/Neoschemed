@@ -7,11 +7,13 @@ namespace Neoschemed
 {
 	public class OptionHandler : IEquatable<OptionHandler>
 	{
+		string description;
 		string[] aliases;
 		Action<string> setter;
 
-		public OptionHandler(string[] aliases, Action<string> setter)
+		public OptionHandler(string description, string[] aliases, Action<string> setter)
 		{
+			this.description = description;
 			this.aliases = aliases;
 			this.setter = setter;
 		}

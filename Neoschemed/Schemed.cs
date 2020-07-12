@@ -7,11 +7,13 @@ namespace Neoschemed
 {
 	public class Schemed
 	{
-		private Scheme scheme;
+        private Scheme scheme;
 		private OptionHandlerSource optSource;
 		private string srcFile = null;
 		private string dstFile = null;
 		private SchemeVersion enforcedVersion = SchemeVersion.Version3;
+
+		private const byte SIGNATURE_BYTE = 0x90;
 
 		private IDictionary<OptionHandler, (string Key, string Value)> parsedArgs = new Dictionary<OptionHandler, (string, string)>();
 
@@ -114,6 +116,7 @@ namespace Neoschemed
 				return;
 			}
 
+			scheme.SchemeEditor = (SchemeEditor)SIGNATURE_BYTE;
 			scheme.Save((dstFile == null) ? srcFile : dstFile);
 		}
 

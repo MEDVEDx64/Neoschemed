@@ -28,7 +28,7 @@ namespace Neoschemed
 
 		void CreateHandlers()
         {
-			handlers.Add(new OptionHandler(new string[] { "--aquasheep", "-as" }, (raw) => { scheme.AquaSheep = ParseBooleanValue(raw); }));
+			handlers.Add(new OptionHandler("Aqua Sheep", new string[] { "--aquasheep", "-as" }, (raw) => { scheme.AquaSheep = ParseBooleanValue(raw); }));
         }
 
 		public OptionHandler Find(string alias)
