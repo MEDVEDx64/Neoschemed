@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Syroot.Worms.Armageddon;
 
@@ -7,19 +6,31 @@ namespace Neoschemed
 {
 	public class Schemed
 	{
-		private Scheme scheme = new Scheme();
+		private Scheme scheme;
+		private OptionHandlerSource optSource;
 		private string srcFile = null;
 		private string dstFile = null;
 
-		private IDictionary<OptionHandler, string> parsedArgs = new Dictionary<OptionHandler, string>();
-
 		public Schemed()
 		{
+			scheme = new Scheme();
+			optSource = new OptionHandlerSource(scheme);
 		}
 
 		void PrintHelp()
 		{
 		}
+
+		void Save()
+        {
+			if(srcFile == null && dstFile == null)
+            {
+				Console.WriteLine("You must specify at least source or destination scheme file name, using -i nor -o keys relatively.");
+				return;
+            }
+
+			scheme.Save((dstFile == null) ? srcFile : dstFile);
+        }
 
 		public void HandleArgs(string[] args)
         {
@@ -55,15 +66,25 @@ namespace Neoschemed
 					return;
                 }
 
-				var opt = OptionHandlerSource.Find(args[i]);
+				var opt = optSource.Find(args[i]);
 				if(opt == null)
                 {
 					Console.WriteLine("Unknown parameter \"" + args[i] + "\"");
 					return;
                 }
 
-				parsedArgs[opt] = args[i + 1];
+				try
+				{
+					opt.SetValue(args[i + 1]);
+				}
+				catch(Exception e)
+                {
+					Console.WriteLine("Exception while parsing value for \"" + args[i] + "\"");
+					Console.WriteLine("  " + e.GetType() + ": " + e.Message);
+                }
             }
+
+			Save();
 		}
 	}
 }

@@ -1,17 +1,27 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
+using System.Collections.Generic;
 
 namespace Neoschemed
 {
-	public class OptionHandler : IEquatable<OptionHandler>
+	public class OptionHandler
 	{
-		public OptionHandler()
+		string[] aliases;
+		Action<string> setter;
+
+		public OptionHandler(string[] aliases, Action<string> setter)
 		{
+			this.aliases = aliases;
+			this.setter = setter;
 		}
 
-        public bool Equals([AllowNull] OptionHandler other)
+		public IEnumerable<string> Aliases
         {
-            throw new NotImplementedException();
+			get => aliases;
+        }
+
+		public void SetValue(string rawValue)
+        {
+			setter(rawValue);
         }
     }
 }
