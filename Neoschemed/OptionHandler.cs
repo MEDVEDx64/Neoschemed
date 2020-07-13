@@ -5,23 +5,28 @@ using System.Linq;
 
 namespace Neoschemed
 {
+	public enum OptionCategory
+    {
+		Generic,
+		Extended,
+		Weapon,
+    }
+
 	public class OptionHandler : IEquatable<OptionHandler>
 	{
-		string description;
 		string[] aliases;
 		Action<string> setter;
 
-		public OptionHandler(string description, string[] aliases, Action<string> setter)
+		public OptionHandler(string[] aliases, Action<string> setter, OptionCategory category = OptionCategory.Generic, string description = null)
 		{
-			this.description = description;
+			Category = category;
+			Description = description;
 			this.aliases = aliases;
 			this.setter = setter;
 		}
 
-		public string Description
-        {
-			get => description;
-        }
+		public OptionCategory Category { get; }
+		public string Description { get; }
 
 		public IEnumerable<string> Aliases
         {

@@ -30,24 +30,34 @@ namespace Neoschemed
 				+ "Essential options:\n"
 				+ "    -i [file] - Load scheme from file;\n"
 				+ "    -o [file] - File where the scheme will be saved. If not set, the input scheme will be overwritten;\n"
-				+ "    -v [format_version] - Enforce a scheme to be saved in older format (default behavior is to upconvert schemes to version 3);\n\n"
-				+ "Scheme options:\n");
+				+ "    -v [format_version] - Enforce a scheme to be saved in older format (default behavior is to upconvert schemes to version 3);\n");
 
-			foreach(var handler in optSource.Handlers)
-            {
+			PrintOptionsHelp(optSource.GetHandlersByCategory(OptionCategory.Generic), "Generic scheme");
+			PrintOptionsHelp(optSource.GetHandlersByCategory(OptionCategory.Extended), "Extended V3 scheme");
+			PrintOptionsHelp(optSource.GetHandlersByCategory(OptionCategory.Weapon), "Weapons");
+
+			Console.Write("\nAll scheme parameters are case-insensitive, so --aquasheep and --AquaSheep will be recognized as the same parameter.\n");
+		}
+
+		void PrintOptionsHelp(IEnumerable<OptionHandler> handlers, string text)
+		{
+			Console.Write("\n" + text + " options (always followed by a value):\n");
+
+			foreach (var handler in handlers)
+			{
 				var aliasStr = "";
-				foreach(var alias in handler.Aliases)
-                {
+				foreach (var alias in handler.Aliases)
+				{
 					aliasStr += (alias + " | ");
-                }
+				}
 
-				if(aliasStr.Length > 0)
-                {
+				if (aliasStr.Length > 0)
+				{
 					aliasStr = aliasStr[0..^3];
-                }
+				}
 
-				Console.WriteLine("    " + aliasStr + "\t[value] - " + handler.Description);
-            }
+				Console.WriteLine("    " + aliasStr + (handler.Description == null ? "" : " - " + handler.Description));
+			}
 		}
 
 		public void HandleArgs(string[] args)
@@ -104,6 +114,7 @@ namespace Neoschemed
 					return;
                 }
 
+				args[i] = args[i].ToLower();
 				var opt = optSource.Find(args[i]);
 				if(opt == null)
                 {

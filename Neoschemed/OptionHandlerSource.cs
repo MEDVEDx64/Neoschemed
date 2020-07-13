@@ -41,5 +41,14 @@ namespace Neoschemed
 
 			return null;
         }
+
+		public IEnumerable<OptionHandler> GetHandlersByCategory(OptionCategory category)
+        {
+			foreach(var handler in handlers)
+            {
+				if (handler.Category == category)
+					yield return handler;
+            }
+        }
 	}
 }
