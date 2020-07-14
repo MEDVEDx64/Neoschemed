@@ -23,19 +23,25 @@ namespace Neoschemed
 			Description = description;
 			this.aliases = aliases;
 			this.setter = setter;
+
+			WorkingAliases = aliases.Select(a => a.ToLower());
 		}
 
 		public OptionCategory Category { get; }
-		public string Description { get; }
+		public string Description { get; set; }
 
-		public IEnumerable<string> Aliases
+		// Only intended for help print
+		public IEnumerable<string> PrintableAliases
         {
 			get => aliases;
         }
 
+		// These are lower-cased aliases for a command, used in argument parsing, equations etc.
+		public IEnumerable<string> WorkingAliases { get; }
+
         public bool Equals([AllowNull] OptionHandler other)
         {
-			return Enumerable.SequenceEqual(aliases, other.aliases);
+			return Enumerable.SequenceEqual(WorkingAliases, other.WorkingAliases);
         }
 
         public void SetValue(string rawValue)

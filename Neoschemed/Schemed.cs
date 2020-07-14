@@ -36,7 +36,7 @@ namespace Neoschemed
 			PrintOptionsHelp(optSource.GetHandlersByCategory(OptionCategory.Extended), "Extended V3 scheme");
 			PrintOptionsHelp(optSource.GetHandlersByCategory(OptionCategory.Weapon), "Weapons");
 
-			Console.Write("\nAll scheme parameters are case-insensitive, so --aquasheep and --AquaSheep will be recognized as the same parameter.\n");
+			Console.Write("\nAll scheme parameters are case-insensitive, so --AquaSheep and --aquasheep will be recognized as the same parameter.\n");
 		}
 
 		void PrintOptionsHelp(IEnumerable<OptionHandler> handlers, string text)
@@ -46,7 +46,7 @@ namespace Neoschemed
 			foreach (var handler in handlers)
 			{
 				var aliasStr = "";
-				foreach (var alias in handler.Aliases)
+				foreach (var alias in handler.PrintableAliases)
 				{
 					aliasStr += (alias + " | ");
 				}
@@ -114,7 +114,6 @@ namespace Neoschemed
 					return;
                 }
 
-				args[i] = args[i].ToLower();
 				var opt = optSource.Find(args[i]);
 				if(opt == null)
                 {

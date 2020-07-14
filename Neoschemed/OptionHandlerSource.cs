@@ -10,6 +10,7 @@ namespace Neoschemed
 		private Scheme scheme;
 		private List<OptionHandler> handlers = new List<OptionHandler>();
 		private OptionCategory quickCategory = OptionCategory.Generic;
+		private OptionHandler quickHandler = null;
 
 		public OptionHandlerSource(Scheme scheme)
         {
@@ -37,16 +38,27 @@ namespace Neoschemed
 			quickCategory = category;
         }
 
-		void AddQuickHandler(string propName, Action<string> setter, string description = null)
+		void AddQuickHandler(Action<string> setter, string propName, params string[] extraKeys)
         {
-			handlers.Add(new OptionHandler(new string[] { "--" + propName.ToLower() }, setter, quickCategory, description));
+			var aliases = new List<string> { "--" + propName };
+			aliases.AddRange(extraKeys);
+			quickHandler = new OptionHandler(aliases.ToArray(), setter, quickCategory);
+			handlers.Add(quickHandler);
+        }
+
+		void SetQuickDescription(string description)
+        {
+			if(quickHandler != null)
+            {
+				quickHandler.Description = description;
+            }
         }
 
 		public OptionHandler Find(string alias)
         {
 			foreach(var h in handlers)
             {
-				if(h.Aliases.Contains(alias))
+				if(h.WorkingAliases.Contains(alias.ToLower()))
 					return h;
             }
 
