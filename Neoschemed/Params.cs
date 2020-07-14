@@ -10,9 +10,14 @@
 			handlers.Add(new OptionHandler(new string[] { "--donorcards", "-dc" }, (raw) => { scheme.DonorCards = ParseBooleanValue(raw); }));
 			handlers.Add(new OptionHandler(new string[] { "--dudmines", "--dud", "-dm" }, (raw) => { scheme.DudMines = ParseBooleanValue(raw); }));
 
-			handlers.Add(new OptionHandler(new string[] { "--anglecheatglitch", "-xacg" }, (raw) => { scheme.Extended.AngleCheatGlitch = ParseBooleanValue(raw); }, category: OptionCategory.Extended));
-			handlers.Add(new OptionHandler(new string[] { "--antilockaim", "-xala" }, (raw) => { scheme.Extended.AntiLockAim = ParseBooleanValue(raw); }, category: OptionCategory.Extended));
-			handlers.Add(new OptionHandler(new string[] { "--antilockpower", "-xalp" }, (raw) => { scheme.Extended.AntiLockPower = ParseBooleanValue(raw); }, category: OptionCategory.Extended));
+			SetQuickHandlerCategory(OptionCategory.Extended);
+
+			AddQuickHandler(nameof(scheme.Extended.AngleCheatGlitch), (raw) => { scheme.Extended.AngleCheatGlitch = ParseBooleanValue(raw); });
+			AddQuickHandler(nameof(scheme.Extended.AntiLockAim), (raw) => { scheme.Extended.AntiLockAim = ParseBooleanValue(raw); });
+			AddQuickHandler(nameof(scheme.Extended.AntiLockPower), (raw) => { scheme.Extended.AntiLockPower = ParseBooleanValue(raw); });
+			AddQuickHandler(nameof(scheme.Extended.AntiSink), (raw) => { scheme.Extended.AntiSink = ParseBooleanValue(raw); });
+			AddQuickHandler(nameof(scheme.Extended.AutoReaim), (raw) => { scheme.Extended.AutoReaim = ParseBooleanValue(raw); });
+			AddQuickHandler(nameof(scheme.Extended.AngleCheatGlitch), (raw) => { scheme.Extended.AngleCheatGlitch = ParseBooleanValue(raw); });
 		}
 	}
 }

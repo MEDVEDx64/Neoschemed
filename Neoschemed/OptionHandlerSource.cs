@@ -9,6 +9,7 @@ namespace Neoschemed
 	{
 		private Scheme scheme;
 		private List<OptionHandler> handlers = new List<OptionHandler>();
+		private OptionCategory quickCategory = OptionCategory.Generic;
 
 		public OptionHandlerSource(Scheme scheme)
         {
@@ -29,6 +30,16 @@ namespace Neoschemed
 				return false;
 
 			throw new ArgumentException("Boolean parameter must have value of 0, 1, false or true");
+        }
+
+		void SetQuickHandlerCategory(OptionCategory category)
+        {
+			quickCategory = category;
+        }
+
+		void AddQuickHandler(string propName, Action<string> setter, string description = null)
+        {
+			handlers.Add(new OptionHandler(new string[] { "--" + propName.ToLower() }, setter, quickCategory, description));
         }
 
 		public OptionHandler Find(string alias)
