@@ -42,22 +42,23 @@ namespace Neoschemed
 
 		void PrintOptionsHelp(IEnumerable<OptionHandler> handlers, string text)
 		{
-			Console.Write("\n" + text + " options (always followed by a value):\n");
+			Console.Write("\n" + text + " options:\n");
 
 			foreach (var handler in handlers)
 			{
 				var aliasStr = "";
 				foreach (var alias in handler.PrintableAliases)
 				{
-					aliasStr += (alias + " | ");
+					aliasStr += (alias + ", ");
 				}
 
 				if (aliasStr.Length > 0)
 				{
-					aliasStr = aliasStr[0..^3];
+					aliasStr = aliasStr[0..^2];
 				}
 
-				Console.WriteLine("    " + aliasStr + (handler.Description == null ? "" : " - " + handler.Description));
+				Console.WriteLine("    " + aliasStr + " [" + handler.GetValueTypeName() + "] "
+					+ (handler.Description == null ? "" : " - " + handler.Description));
 			}
 		}
 

@@ -64,11 +64,11 @@ namespace Neoschemed
 			quickCategory = category;
         }
 
-		void AddQuickHandler(Action<string> setter, string propName, params string[] extraKeys)
+		void AddQuickHandler(OptionValueType type, Action<string> setter, string propName, params string[] extraKeys)
         {
 			var aliases = new List<string> { "--" + propName };
 			aliases.AddRange(extraKeys);
-			quickHandler = new OptionHandler(aliases.ToArray(), setter, quickCategory);
+			quickHandler = new OptionHandler(aliases.ToArray(), setter, type, quickCategory);
 			handlers.Add(quickHandler);
         }
 

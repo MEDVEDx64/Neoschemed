@@ -12,17 +12,25 @@ namespace Neoschemed
 		Weapon,
     }
 
+	public enum OptionValueType
+    {
+		Boolean,
+		Numeric,
+    }
+
 	public class OptionHandler : IEquatable<OptionHandler>
 	{
 		string[] aliases;
 		Action<string> setter;
+		OptionValueType type;
 
-		public OptionHandler(string[] aliases, Action<string> setter, OptionCategory category = OptionCategory.Generic, string description = null)
+		public OptionHandler(string[] aliases, Action<string> setter, OptionValueType type, OptionCategory category = OptionCategory.Generic, string description = null)
 		{
 			Category = category;
 			Description = description;
 			this.aliases = aliases;
 			this.setter = setter;
+			this.type = type;
 
 			WorkingAliases = aliases.Select(a => a.ToLower());
 		}
@@ -42,6 +50,11 @@ namespace Neoschemed
         public bool Equals([AllowNull] OptionHandler other)
         {
 			return Enumerable.SequenceEqual(WorkingAliases, other.WorkingAliases);
+        }
+
+		public string GetValueTypeName()
+        {
+			return type.ToString().ToLower();
         }
 
         public void SetValue(string rawValue)
