@@ -23,7 +23,7 @@ namespace Neoschemed
 			get => handlers;
         }
 
-		bool ParseBooleanValue(string raw)
+		static bool ParseBooleanValue(string raw)
         {
 			if(raw == "1" || raw.ToLower() == "true")
 				return true;
@@ -32,6 +32,32 @@ namespace Neoschemed
 
 			throw new ArgumentException("Boolean parameter must have value of 0, 1, false or true");
         }
+
+		static object ParseOptionalValue<T>(string raw)
+		{
+			if (raw == "default" || raw == "null")
+				return null;
+
+			var t = typeof(T);
+
+			if (t == typeof(bool))
+				return ParseBooleanValue(raw);
+
+			if (t == typeof(byte))
+				return byte.Parse(raw);
+			if (t == typeof(sbyte))
+				return sbyte.Parse(raw);
+			if (t == typeof(short))
+				return short.Parse(raw);
+			if (t == typeof(ushort))
+				return ushort.Parse(raw);
+			if (t == typeof(int))
+				return int.Parse(raw);
+			if (t == typeof(uint))
+				return uint.Parse(raw);
+
+			throw new ArgumentException("Bug: cannot parse \"" + t.Name + "\" type");
+		}
 
 		void SetQuickHandlerCategory(OptionCategory category)
         {
@@ -52,6 +78,11 @@ namespace Neoschemed
             {
 				quickHandler.Description = description;
             }
+        }
+
+		void TellParamHasDefaultValue()
+        {
+			SetQuickDescription("Accepts 'default' value");
         }
 
 		public OptionHandler Find(string alias)

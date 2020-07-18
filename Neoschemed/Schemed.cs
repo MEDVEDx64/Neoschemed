@@ -37,6 +37,7 @@ namespace Neoschemed
 			PrintOptionsHelp(optSource.GetHandlersByCategory(OptionCategory.Weapon), "Weapons");
 
 			Console.Write("\nAll scheme parameters are case-insensitive, so --AquaSheep and --aquasheep will be recognized as the same parameter.\n");
+			Console.WriteLine("Tip: Value 'null' has the same meaning as 'default', where it is acceptable.");
 		}
 
 		void PrintOptionsHelp(IEnumerable<OptionHandler> handlers, string text)
