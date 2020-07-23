@@ -26,9 +26,10 @@ namespace Neoschemed
 
 		static bool ParseBooleanValue(string raw)
         {
-			if(raw == "1" || raw.ToLower() == "true")
+			var low = raw.ToLower();
+			if(low == "1" || low == "true" || low == "yes")
 				return true;
-			if(raw == "0" || raw.ToLower() == "false")
+			if(low == "0" || low == "false" || low == "no")
 				return false;
 
 			throw new ArgumentException("Boolean parameter must have value of 0, 1, false or true");
