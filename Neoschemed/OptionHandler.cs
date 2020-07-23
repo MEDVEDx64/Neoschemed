@@ -15,7 +15,9 @@ namespace Neoschemed
 	public enum OptionValueType
     {
 		Boolean,
-		Numeric,
+		Decimal,
+		Float,
+		Enum,
     }
 
 	public class OptionHandler : IEquatable<OptionHandler>

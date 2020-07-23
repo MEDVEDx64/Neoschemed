@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace Neoschemed
 {
@@ -33,6 +34,22 @@ namespace Neoschemed
 			throw new ArgumentException("Boolean parameter must have value of 0, 1, false or true");
         }
 
+		static T ParseEnumValue<T>(string raw)
+        {
+			// Not a good solution, but it allows case-independent enum parsing
+			var buf = raw.ToArray();
+
+			for(int i = 0; i < raw.Length; i++)
+            {
+				if(i == 0)
+					buf[i] = char.ToUpper(raw[i]);
+				else
+					buf[i] = char.ToLower(raw[i]);
+            }
+
+			return (T)Enum.Parse(typeof(T), new string(buf));
+		}
+
 		static object ParseOptionalValue<T>(string raw)
 		{
 			if (raw == "default" || raw == "null")
@@ -55,6 +72,8 @@ namespace Neoschemed
 				return int.Parse(raw);
 			if (t == typeof(uint))
 				return uint.Parse(raw);
+			if (t == typeof(float))
+				return float.Parse(raw);
 
 			throw new ArgumentException("Bug: cannot parse \"" + t.Name + "\" type");
 		}
@@ -83,6 +102,20 @@ namespace Neoschemed
 		void TellParamHasDefaultValue()
         {
 			SetQuickDescription("Accepts 'default' value");
+        }
+
+		void DescribeEnumValues<T>()
+        {
+			var desc = new StringBuilder();
+			desc.Append("Acceptable values: ");
+			
+			foreach(var e in Enum.GetValues(typeof(T)))
+            {
+				desc.Append(e.ToString().ToLower() + ", ");
+            }
+
+			desc.Remove(desc.Length - 2, 2);
+			SetQuickDescription(desc.ToString());
         }
 
 		public OptionHandler Find(string alias)

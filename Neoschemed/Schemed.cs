@@ -38,6 +38,7 @@ namespace Neoschemed
 
 			Console.Write("\nAll scheme parameters are case-insensitive, so --AquaSheep and --aquasheep will be recognized as the same parameter.\n");
 			Console.WriteLine("Tip: Value 'null' has the same meaning as 'default', where it is acceptable.");
+			Console.WriteLine("Tip: Most enum parameters will also accept a decimal value.");
 		}
 
 		void PrintOptionsHelp(IEnumerable<OptionHandler> handlers, string text)
@@ -57,7 +58,7 @@ namespace Neoschemed
 					aliasStr = aliasStr[0..^2];
 				}
 
-				Console.WriteLine("    " + aliasStr + " [" + handler.GetValueTypeName() + "] "
+				Console.WriteLine("    " + aliasStr + " [" + handler.GetValueTypeName() + "]"
 					+ (handler.Description == null ? "" : " - " + handler.Description));
 			}
 		}
