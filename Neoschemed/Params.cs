@@ -51,6 +51,21 @@ namespace Neoschemed
 			AddQuickHandler(OptionValueType.Boolean, (raw) => { scheme.Extended.GroupPlaceAllies = ParseBooleanValue(raw); }, nameof(scheme.Extended.GroupPlaceAllies), "--group");
 			AddQuickHandler(OptionValueType.Enum, (raw) => { scheme.Extended.HealthCure = ParseEnumValue<HealthCure>(raw); }, nameof(scheme.Extended.HealthCure));
 			DescribeEnumValues<HealthCure>();
+			AddQuickHandler(OptionValueType.Boolean, (raw) => { scheme.Extended.HerdDoublingGlitch = (bool?)ParseOptionalValue<bool>(raw); }, nameof(scheme.Extended.HerdDoublingGlitch));
+			TellParamHasDefaultValue();
+			AddQuickHandler(OptionValueType.Boolean, (raw) => { scheme.Extended.IndianRopeGlitch = (bool?)ParseOptionalValue<bool>(raw); }, nameof(scheme.Extended.IndianRopeGlitch), "--indian");
+			TellParamHasDefaultValue();
+			AddQuickHandler(OptionValueType.Boolean, (raw) => { scheme.Extended.JetpackBungeeGlitch = ParseBooleanValue(raw); }, nameof(scheme.Extended.JetpackBungeeGlitch));
+			AddQuickHandler(OptionValueType.Float, (raw) => { scheme.Extended.JetpackMaxSpeed = float.Parse(raw); }, nameof(scheme.Extended.JetpackMaxSpeed));
+			AddQuickHandler(OptionValueType.Decimal, (raw) => { scheme.Extended.KaosMod = byte.Parse(raw); }, nameof(scheme.Extended.KaosMod), "--kaos");
+			AddQuickHandler(OptionValueType.Boolean, (raw) => { scheme.Extended.KeepControlHeadBump = ParseBooleanValue(raw); }, nameof(scheme.Extended.KeepControlHeadBump));
+			AddQuickHandler(OptionValueType.Enum, (raw) => { scheme.Extended.KeepControlSkim = ParseEnumValue<SkimControlLoss>(raw); }, nameof(scheme.Extended.KeepControlSkim));
+			DescribeEnumValues<SkimControlLoss>();
+			AddQuickHandler(OptionValueType.Enum, (raw) => { scheme.Extended.KeepControlXImpact = ParseEnumValue<XImpactControlLoss>(raw); }, nameof(scheme.Extended.KeepControlXImpact));
+			DescribeEnumValues<XImpactControlLoss>();
+			AddQuickHandler(OptionValueType.Boolean, (raw) => { scheme.Extended.LoseControlDoesntEndTurn = ParseBooleanValue(raw); }, nameof(scheme.Extended.LoseControlDoesntEndTurn), "-ldet");
+			AddQuickHandler(OptionValueType.Decimal, (raw) => { scheme.Extended.NoCrateProbability = (byte?)ParseOptionalValue<byte>(raw); }, nameof(scheme.Extended.NoCrateProbability));
+			TellParamHasDefaultValue();
 		}
 	}
 }
