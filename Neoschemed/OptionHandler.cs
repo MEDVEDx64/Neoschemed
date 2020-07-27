@@ -18,26 +18,27 @@ namespace Neoschemed
 		Decimal,
 		Float,
 		Enum,
+		Flags,
     }
 
 	public class OptionHandler : IEquatable<OptionHandler>
 	{
 		string[] aliases;
 		Action<string> setter;
-		OptionValueType type;
 
 		public OptionHandler(string[] aliases, Action<string> setter, OptionValueType type, OptionCategory category = OptionCategory.Generic, string description = null)
 		{
+			ValueType = type;
 			Category = category;
 			Description = description;
 			this.aliases = aliases;
 			this.setter = setter;
-			this.type = type;
 
 			WorkingAliases = aliases.Select(a => a.ToLower());
 		}
 
 		public OptionCategory Category { get; }
+		public OptionValueType ValueType { get; }
 		public string Description { get; set; }
 
 		// Only intended for help print
@@ -56,7 +57,10 @@ namespace Neoschemed
 
 		public string GetValueTypeName()
         {
-			return type.ToString().ToLower();
+			if (ValueType == OptionValueType.Flags)
+				return "comma-separated flags";
+
+			return ValueType.ToString().ToLower();
         }
 
         public void SetValue(string rawValue)

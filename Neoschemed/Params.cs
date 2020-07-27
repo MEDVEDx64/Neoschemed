@@ -81,9 +81,11 @@ namespace Neoschemed
 			AddQuickHandler(OptionValueType.Enum, (raw) => { scheme.Extended.RwGravityType = ParseEnumValue<RwGravityType>(raw); }, nameof(scheme.Extended.RwGravityType));
 			DescribeEnumValues<RwGravityType>();
 			AddQuickHandler(OptionValueType.Float, (raw) => { scheme.Extended.RwWind = float.Parse(raw); }, nameof(scheme.Extended.RwWind));
-			// check this!
-			//AddQuickHandler(OptionValueType.Enum, (raw) => { scheme.Extended.SheepHeavenFlags = ParseEnumValue<SheepHeavenFlags>(raw); }, nameof(scheme.Extended.SheepHeavenFlags));
-			//DescribeEnumValues<SheepHeavenFlags>();
+			AddQuickHandler(OptionValueType.Flags, (raw) => {
+				scheme.Extended.SheepHeavenFlags = 0;
+				foreach (SheepHeavenFlags f in ParseEnumFlags<SheepHeavenFlags>(raw)) scheme.Extended.SheepHeavenFlags |= f;
+			}, nameof(scheme.Extended.SheepHeavenFlags));
+			DescribeEnumValues<SheepHeavenFlags>();
 			AddQuickHandler(OptionValueType.Boolean, (raw) => { scheme.Extended.ShotDoesntEndTurn = ParseBooleanValue(raw); }, nameof(scheme.Extended.ShotDoesntEndTurn), "-sdet");
 			AddQuickHandler(OptionValueType.Boolean, (raw) => { scheme.Extended.ShotDoesntEndTurnAll = ParseBooleanValue(raw); }, nameof(scheme.Extended.ShotDoesntEndTurnAll));
 			AddQuickHandler(OptionValueType.Enum, (raw) => { scheme.Extended.SkipWalk = ParseEnumValue<SkipWalk>(raw); }, nameof(scheme.Extended.SkipWalk));

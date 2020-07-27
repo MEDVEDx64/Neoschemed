@@ -51,6 +51,20 @@ namespace Neoschemed
 			return (T)Enum.Parse(typeof(T), new string(buf));
 		}
 
+		static IEnumerable<T> ParseEnumFlags<T>(string raw)
+        {
+			if(raw.ToLower() == "none")
+            {
+				yield break;
+            }
+
+			var flags = raw.Split(',');
+			foreach(var flag in flags)
+            {
+				yield return ParseEnumValue<T>(flag);
+            }
+        }
+
 		static object ParseOptionalValue<T>(string raw)
 		{
 			if (raw == "default" || raw == "null")
@@ -109,6 +123,11 @@ namespace Neoschemed
         {
 			var desc = new StringBuilder();
 			desc.Append("Acceptable values: ");
+
+			if(quickHandler.ValueType == OptionValueType.Flags)
+            {
+				desc.Append("none, ");
+            }
 			
 			foreach(var e in Enum.GetValues(typeof(T)))
             {
