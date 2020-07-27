@@ -1,5 +1,4 @@
 ﻿using Syroot.Worms.Armageddon;
-using System;
 
 namespace Neoschemed
 {
@@ -66,6 +65,48 @@ namespace Neoschemed
 			AddQuickHandler(OptionValueType.Boolean, (raw) => { scheme.Extended.LoseControlDoesntEndTurn = ParseBooleanValue(raw); }, nameof(scheme.Extended.LoseControlDoesntEndTurn), "-ldet");
 			AddQuickHandler(OptionValueType.Decimal, (raw) => { scheme.Extended.NoCrateProbability = (byte?)ParseOptionalValue<byte>(raw); }, nameof(scheme.Extended.NoCrateProbability));
 			TellParamHasDefaultValue();
+			AddQuickHandler(OptionValueType.Boolean, (raw) => { scheme.Extended.ObjectPushByExplosion = (bool?)ParseOptionalValue<bool>(raw); }, nameof(scheme.Extended.ObjectPushByExplosion));
+			TellParamHasDefaultValue();
+			AddQuickHandler(OptionValueType.Float, (raw) => { scheme.Extended.ProjectileMaxSpeed = float.Parse(raw); }, nameof(scheme.Extended.ProjectileMaxSpeed));
+			AddQuickHandler(OptionValueType.Enum, (raw) => { scheme.Extended.Roofing = ParseEnumValue<Roofing>(raw); }, nameof(scheme.Extended.Roofing));
+			DescribeEnumValues<Roofing>();
+			AddQuickHandler(OptionValueType.Decimal, (raw) => { scheme.Extended.RopeKnockForce = (byte?)ParseOptionalValue<byte>(raw); }, nameof(scheme.Extended.RopeKnockForce));
+			TellParamHasDefaultValue();
+			AddQuickHandler(OptionValueType.Float, (raw) => { scheme.Extended.RopeMaxSpeed = float.Parse(raw); }, nameof(scheme.Extended.RopeMaxSpeed));
+			AddQuickHandler(OptionValueType.Enum, (raw) => { scheme.Extended.RopeRollDrops = ParseEnumValue<RopeRollDrops>(raw); }, nameof(scheme.Extended.RopeRollDrops));
+			DescribeEnumValues<RopeRollDrops>();
+			AddQuickHandler(OptionValueType.Boolean, (raw) => { scheme.Extended.RopeUpgrade = ParseBooleanValue(raw); }, nameof(scheme.Extended.RopeUpgrade));
+			AddQuickHandler(OptionValueType.Boolean, (raw) => { scheme.Extended.RoundTimeFractional = ParseBooleanValue(raw); }, nameof(scheme.Extended.RoundTimeFractional));
+			AddQuickHandler(OptionValueType.Float, (raw) => { scheme.Extended.RwGravity = float.Parse(raw); }, nameof(scheme.Extended.RwGravity));
+			AddQuickHandler(OptionValueType.Enum, (raw) => { scheme.Extended.RwGravityType = ParseEnumValue<RwGravityType>(raw); }, nameof(scheme.Extended.RwGravityType));
+			DescribeEnumValues<RwGravityType>();
+			AddQuickHandler(OptionValueType.Float, (raw) => { scheme.Extended.RwWind = float.Parse(raw); }, nameof(scheme.Extended.RwWind));
+			// check this!
+			//AddQuickHandler(OptionValueType.Enum, (raw) => { scheme.Extended.SheepHeavenFlags = ParseEnumValue<SheepHeavenFlags>(raw); }, nameof(scheme.Extended.SheepHeavenFlags));
+			//DescribeEnumValues<SheepHeavenFlags>();
+			AddQuickHandler(OptionValueType.Boolean, (raw) => { scheme.Extended.ShotDoesntEndTurn = ParseBooleanValue(raw); }, nameof(scheme.Extended.ShotDoesntEndTurn), "-sdet");
+			AddQuickHandler(OptionValueType.Boolean, (raw) => { scheme.Extended.ShotDoesntEndTurnAll = ParseBooleanValue(raw); }, nameof(scheme.Extended.ShotDoesntEndTurnAll));
+			AddQuickHandler(OptionValueType.Enum, (raw) => { scheme.Extended.SkipWalk = ParseEnumValue<SkipWalk>(raw); }, nameof(scheme.Extended.SkipWalk));
+			AddQuickHandler(OptionValueType.Boolean, (raw) => { scheme.Extended.SuddenDeathNoWormSelect = ParseBooleanValue(raw); }, nameof(scheme.Extended.SuddenDeathNoWormSelect));
+			AddQuickHandler(OptionValueType.Decimal, (raw) => { scheme.Extended.SuddenDeathTurnDamage = byte.Parse(raw); }, nameof(scheme.Extended.SuddenDeathTurnDamage));
+			AddQuickHandler(OptionValueType.Boolean, (raw) => { scheme.Extended.TerrainOverlapGlitch = (bool?)ParseOptionalValue<bool>(raw); }, nameof(scheme.Extended.TerrainOverlapGlitch));
+			TellParamHasDefaultValue();
+			AddQuickHandler(OptionValueType.Boolean, (raw) => { scheme.Extended.UndeterminedCrates = (bool?)ParseOptionalValue<bool>(raw); }, nameof(scheme.Extended.UndeterminedCrates));
+			TellParamHasDefaultValue();
+			AddQuickHandler(OptionValueType.Boolean, (raw) => { scheme.Extended.UndeterminedMineFuse = (bool?)ParseOptionalValue<bool>(raw); }, nameof(scheme.Extended.UndeterminedMineFuse));
+			TellParamHasDefaultValue();
+			AddQuickHandler(OptionValueType.Float, (raw) => { scheme.Extended.Viscosity = float.Parse(raw); }, nameof(scheme.Extended.Viscosity));
+			AddQuickHandler(OptionValueType.Boolean, (raw) => { scheme.Extended.ViscosityWorms = ParseBooleanValue(raw); }, nameof(scheme.Extended.ViscosityWorms));
+			AddQuickHandler(OptionValueType.Boolean, (raw) => { scheme.Extended.WeaponsDontChange = ParseBooleanValue(raw); }, nameof(scheme.Extended.WeaponsDontChange));
+			AddQuickHandler(OptionValueType.Decimal, (raw) => { scheme.Extended.Wind = short.Parse(raw); }, nameof(scheme.Extended.Wind));
+			AddQuickHandler(OptionValueType.Decimal, (raw) => { scheme.Extended.WindBias = byte.Parse(raw); }, nameof(scheme.Extended.WindBias));
+			AddQuickHandler(OptionValueType.Float, (raw) => { scheme.Extended.WormBounce = float.Parse(raw); }, nameof(scheme.Extended.WormBounce));
+			AddQuickHandler(OptionValueType.Enum, (raw) => { scheme.Extended.WormPhasingAlly = ParseEnumValue<WormPhasing>(raw); }, nameof(scheme.Extended.WormPhasingAlly));
+			DescribeEnumValues<WormPhasing>();
+			AddQuickHandler(OptionValueType.Enum, (raw) => { scheme.Extended.WormPhasingEnemy = ParseEnumValue<WormPhasing>(raw); }, nameof(scheme.Extended.WormPhasingEnemy));
+			DescribeEnumValues<WormPhasing>();
+			AddQuickHandler(OptionValueType.Boolean, (raw) => { scheme.Extended.WormSelectAnytime = ParseBooleanValue(raw); }, nameof(scheme.Extended.WormSelectAnytime));
+			AddQuickHandler(OptionValueType.Boolean, (raw) => { scheme.Extended.WormSelectKeepHotSeat = ParseBooleanValue(raw); }, nameof(scheme.Extended.WormSelectKeepHotSeat));
 		}
 	}
 }
