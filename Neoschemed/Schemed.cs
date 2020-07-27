@@ -36,9 +36,9 @@ namespace Neoschemed
 			PrintOptionsHelp(optSource.GetHandlersByCategory(OptionCategory.Extended), "Extended V3 scheme");
 			PrintOptionsHelp(optSource.GetHandlersByCategory(OptionCategory.Weapon), "Weapons");
 
-			Console.Write("\nAll scheme parameters are case-insensitive, so --AquaSheep and --aquasheep will be recognized as the same parameter.\n");
+			Console.Write("\nAll scheme settings are case-insensitive, so --AquaSheep and --aquasheep will be recognized as the same option.\n");
 			Console.WriteLine("Tip: Value 'null' has the same meaning as 'default', where it is acceptable.");
-			Console.WriteLine("Tip: Most enum parameters will also accept a decimal value.");
+			Console.WriteLine("Tip: Most enum options will also accept a decimal value.");
 		}
 
 		void PrintOptionsHelp(IEnumerable<OptionHandler> handlers, string text)
