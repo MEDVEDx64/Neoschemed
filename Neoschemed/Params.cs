@@ -8,11 +8,49 @@ namespace Neoschemed
 		{
 			SetQuickHandlerCategory(OptionCategory.Generic);
 
-			AddQuickHandler(OptionValueType.Boolean, (raw) => { scheme.AquaSheep = ParseBooleanValue(raw); }, nameof(scheme.AquaSheep), "-as");
+			AddQuickHandler(OptionValueType.Boolean, (raw) => { scheme.AquaSheep = ParseBooleanValue(raw); }, nameof(scheme.AquaSheep));
 			AddQuickHandler(OptionValueType.Boolean, (raw) => { scheme.ArtilleryMode = ParseBooleanValue(raw); }, nameof(scheme.ArtilleryMode), "--artillery", "-am");
-			AddQuickHandler(OptionValueType.Boolean, (raw) => { scheme.Blood = ParseBooleanValue(raw); }, nameof(scheme.Blood), "-b");
+			AddQuickHandler(OptionValueType.Boolean, (raw) => { scheme.Blood = ParseBooleanValue(raw); }, nameof(scheme.Blood));
 			AddQuickHandler(OptionValueType.Boolean, (raw) => { scheme.DonorCards = ParseBooleanValue(raw); }, nameof(scheme.DonorCards), "-dc");
 			AddQuickHandler(OptionValueType.Boolean, (raw) => { scheme.DudMines = ParseBooleanValue(raw); }, nameof(scheme.DudMines), "--dud", "-dm");
+			AddQuickHandler(OptionValueType.Decimal, (raw) => { scheme.FallDamage = int.Parse(raw); }, nameof(scheme.FallDamage), "-fd");
+			AddQuickHandler(OptionValueType.Boolean, (raw) => { scheme.GodWorms = ParseBooleanValue(raw); }, nameof(scheme.GodWorms), "-g");
+			AddQuickHandler(OptionValueType.Decimal, (raw) => { scheme.HealthCrateEnergy = byte.Parse(raw); }, nameof(scheme.HealthCrateEnergy), "-hcen");
+			AddQuickHandler(OptionValueType.Decimal, (raw) => { scheme.HealthCrateProb = sbyte.Parse(raw); }, nameof(scheme.HealthCrateProb), "-hcpr");
+			AddQuickHandler(OptionValueType.Decimal, (raw) => { scheme.HotSeatTime = byte.Parse(raw); }, nameof(scheme.HotSeatTime), "-hs");
+			AddQuickHandler(OptionValueType.Boolean, (raw) => { scheme.IndiLand = ParseBooleanValue(raw); }, nameof(scheme.IndiLand), "-l");
+			AddQuickHandler(OptionValueType.Boolean, (raw) => { scheme.ManualWormPlacement = ParseBooleanValue(raw); }, nameof(scheme.ManualWormPlacement), "--placement", "-p");
+			AddQuickHandler(OptionValueType.Decimal, (raw) => { scheme.MineDelay = byte.Parse(raw); }, nameof(scheme.MineDelay), "-md");
+			AddQuickHandler(OptionValueType.Boolean, (raw) => { scheme.MineDelayRandom = ParseBooleanValue(raw); }, nameof(scheme.MineDelayRandom), "-mdr");
+			AddQuickHandler(OptionValueType.Decimal, (raw) => { scheme.NumberOfWins = byte.Parse(raw); }, nameof(scheme.NumberOfWins), "--wins", "-w");
+			AddQuickHandler(OptionValueType.Decimal, (raw) => { scheme.ObjectCount = byte.Parse(raw); }, nameof(scheme.ObjectCount), "-oc");
+			AddQuickHandler(OptionValueType.Enum, (raw) => { scheme.ObjectTypes = ParseEnumValue<MapObjectType>(raw); }, nameof(scheme.ObjectTypes), "-ot");
+			DescribeEnumValues<MapObjectType>();
+			AddQuickHandler(OptionValueType.Boolean, (raw) => { scheme.Replays = ParseBooleanValue(raw); }, nameof(scheme.Replays));
+			AddQuickHandler(OptionValueType.Decimal, (raw) => { scheme.RetreatTime = byte.Parse(raw); }, nameof(scheme.RetreatTime), "-ret");
+			AddQuickHandler(OptionValueType.Decimal, (raw) => { scheme.RetreatTimeRope = byte.Parse(raw); }, nameof(scheme.RetreatTimeRope), "-retr");
+			AddQuickHandler(OptionValueType.Decimal, (raw) => { scheme.RoundTimeMinutes = byte.Parse(raw); }, nameof(scheme.RoundTimeMinutes), "-rmin");
+			AddQuickHandler(OptionValueType.Decimal, (raw) => { scheme.RoundTimeSeconds = byte.Parse(raw); }, nameof(scheme.RoundTimeSeconds), "-rsec");
+			AddQuickHandler(OptionValueType.Boolean, (raw) => { scheme.SheepHeaven = ParseBooleanValue(raw); }, nameof(scheme.SheepHeaven));
+			AddQuickHandler(OptionValueType.Boolean, (raw) => { scheme.ShowRoundTime = ParseBooleanValue(raw); }, nameof(scheme.ShowRoundTime));
+			AddQuickHandler(OptionValueType.Enum, (raw) => { scheme.Stockpiling = ParseEnumValue<Stockpiling>(raw); }, nameof(scheme.Stockpiling));
+			DescribeEnumValues<Stockpiling>();
+			AddQuickHandler(OptionValueType.Enum, (raw) => { scheme.SuddenDeathEvent = ParseEnumValue<SuddenDeathEvent>(raw); }, nameof(scheme.SuddenDeathEvent));
+			DescribeEnumValues<SuddenDeathEvent>();
+			AddQuickHandler(OptionValueType.Boolean, (raw) => { scheme.SuperWeapons = ParseBooleanValue(raw); }, nameof(scheme.SuperWeapons), "--super", "-sw");
+			AddQuickHandler(OptionValueType.Boolean, (raw) => { scheme.TeamWeapons = ParseBooleanValue(raw); }, nameof(scheme.TeamWeapons), "-tw");
+			AddQuickHandler(OptionValueType.Decimal, (raw) => { scheme.TurnTime = byte.Parse(raw); }, nameof(scheme.TurnTime), "-t");
+			AddQuickHandler(OptionValueType.Boolean, (raw) => { scheme.TurnTimeInfinite = ParseBooleanValue(raw); }, nameof(scheme.TurnTimeInfinite), "-inf");
+			AddQuickHandler(OptionValueType.Boolean, (raw) => { scheme.UpgradeCluster = ParseBooleanValue(raw); }, nameof(scheme.UpgradeCluster), "-cu");
+			AddQuickHandler(OptionValueType.Boolean, (raw) => { scheme.UpgradeGrenade = ParseBooleanValue(raw); }, nameof(scheme.UpgradeGrenade), "-gu");
+			AddQuickHandler(OptionValueType.Boolean, (raw) => { scheme.UpgradeLongbow = ParseBooleanValue(raw); }, nameof(scheme.UpgradeLongbow), "-lu");
+			AddQuickHandler(OptionValueType.Boolean, (raw) => { scheme.UpgradeShotgun = ParseBooleanValue(raw); }, nameof(scheme.UpgradeShotgun), "-su");
+			AddQuickHandler(OptionValueType.Decimal, (raw) => { scheme.UtilityCrateProb = sbyte.Parse(raw); }, nameof(scheme.UtilityCrateProb), "-ucpr");
+			AddQuickHandler(OptionValueType.Decimal, (raw) => { scheme.WaterRiseRate = byte.Parse(raw); }, nameof(scheme.WaterRiseRate), "-wr");
+			AddQuickHandler(OptionValueType.Decimal, (raw) => { scheme.WeaponCrateProb = sbyte.Parse(raw); }, nameof(scheme.WeaponCrateProb), "-wcpr");
+			AddQuickHandler(OptionValueType.Decimal, (raw) => { scheme.WormEnergy = byte.Parse(raw); }, nameof(scheme.WormEnergy), "--health", "-h");
+			AddQuickHandler(OptionValueType.Enum, (raw) => { scheme.WormSelect = ParseEnumValue<WormSelect>(raw); }, nameof(scheme.WormSelect));
+			DescribeEnumValues<WormSelect>();
 
 			SetQuickHandlerCategory(OptionCategory.Extended);
 
