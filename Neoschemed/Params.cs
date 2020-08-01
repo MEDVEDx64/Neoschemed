@@ -147,6 +147,10 @@ namespace Neoschemed
 			DescribeEnumValues<WormPhasing>();
 			AddQuickHandler(OptionValueType.Boolean, (raw) => { scheme.Extended.WormSelectAnytime = ParseBooleanValue(raw); }, nameof(scheme.Extended.WormSelectAnytime));
 			AddQuickHandler(OptionValueType.Boolean, (raw) => { scheme.Extended.WormSelectKeepHotSeat = ParseBooleanValue(raw); }, nameof(scheme.Extended.WormSelectKeepHotSeat));
+
+			SetQuickHandlerCategory(OptionCategory.Weapon);
+
+			GenerateWeaponHandlers();
 		}
 	}
 }

@@ -138,6 +138,34 @@ namespace Neoschemed
 			SetQuickDescription(desc.ToString());
         }
 
+		sbyte ParseAmmoValue(string raw)
+        {
+			if (raw == "inf") return 10;
+			return sbyte.Parse(raw);
+        }
+
+		byte ParsePowerValue(string raw)
+        {
+			var value = int.Parse(raw);
+			if (value == 0)
+				throw new ArgumentException("'0' is not a valid weapon power value");
+
+			return (byte)(value - 1);
+        }
+
+		void GenerateWeaponHandlers()
+        {
+			foreach (var w in Enum.GetValues(typeof(Weapon)))
+            {
+				var weapon = (Weapon)w;
+
+				AddQuickHandler(OptionValueType.Decimal, (raw) => { scheme.Weapons[weapon].Ammo = ParseAmmoValue(raw); }, w.ToString() + "Ammo");
+				AddQuickHandler(OptionValueType.Decimal, (raw) => { scheme.Weapons[weapon].Delay = sbyte.Parse(raw); }, w.ToString() + "Delay");
+				AddQuickHandler(OptionValueType.Decimal, (raw) => { scheme.Weapons[weapon].Power = ParsePowerValue(raw); }, w.ToString() + "Power");
+				AddQuickHandler(OptionValueType.Decimal, (raw) => { scheme.Weapons[weapon].Prob = sbyte.Parse(raw); }, w.ToString() + "Prob");
+			}
+		}
+
 		public OptionHandler Find(string alias)
         {
 			foreach(var h in handlers)
