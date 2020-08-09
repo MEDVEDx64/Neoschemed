@@ -13,7 +13,8 @@ namespace Neoschemed
 		private string dstFile = null;
 		private SchemeVersion enforcedVersion = SchemeVersion.Version3;
 
-		private const byte SIGNATURE_BYTE = 0x90;
+		private static readonly byte SIGNATURE_BYTE = 0x90;
+		private static readonly string SCHEME_EXT = ".wsc";
 
 		private IDictionary<OptionHandler, (string Key, string Value)> parsedArgs = new Dictionary<OptionHandler, (string, string)>();
 
@@ -46,6 +47,7 @@ namespace Neoschemed
 				"Value 'null' has the same meaning as 'default', where it is acceptable.",
 				"Most enum options will also accept a decimal value.",
 				"You can pass the 'inf' value to a weapon ammo option.",
+				"It is not necessary to type '.wsc' extension for '-i' and '-o' options.",
 			};
 
 			Console.WriteLine();
@@ -160,10 +162,18 @@ namespace Neoschemed
 			Save();
 		}
 
+		static string PreprocessFileName(string s)
+        {
+			if (!s.EndsWith(SCHEME_EXT))
+				return s + SCHEME_EXT;
+
+			return s;
+        }
+
 		void Load()
         {
 			if(srcFile != null)
-				scheme.Load(srcFile);
+				scheme.Load(PreprocessFileName(srcFile));
         }
 
 		void Save()
@@ -176,7 +186,7 @@ namespace Neoschemed
 			}
 
 			scheme.SchemeEditor = (SchemeEditor)SIGNATURE_BYTE;
-			scheme.Save((dstFile == null) ? srcFile : dstFile);
+			scheme.Save(PreprocessFileName((dstFile == null) ? srcFile : dstFile));
 		}
 
 		void ApplyValues()
