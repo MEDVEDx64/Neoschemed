@@ -47,7 +47,7 @@ namespace Neoschemed
 				"Value 'null' has the same meaning as 'default', where it is acceptable.",
 				"Most enum options will also accept a decimal value.",
 				"You can pass the 'inf' value to a weapon ammo option.",
-				"It is not necessary to type '.wsc' extension for '-i' and '-o' options.",
+				"It is not necessary to type '.wsc' extension with '-i' and '-o' options.",
 			};
 
 			Console.WriteLine();
