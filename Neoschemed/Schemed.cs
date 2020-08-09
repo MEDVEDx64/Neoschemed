@@ -34,11 +34,23 @@ namespace Neoschemed
 
 			PrintOptionsHelp(optSource.GetHandlersByCategory(OptionCategory.Generic), "Generic scheme");
 			PrintOptionsHelp(optSource.GetHandlersByCategory(OptionCategory.Extended), "Extended V3 scheme");
-			PrintOptionsHelp(optSource.GetHandlersByCategory(OptionCategory.Weapon), "Weapons");
+			PrintWeaponsHelp();
+			PrintTips();
+		}
 
-			Console.Write("\nAll scheme settings are case-insensitive, so --AquaSheep and --aquasheep will be recognized as the same option.\n");
-			Console.WriteLine("Tip: Value 'null' has the same meaning as 'default', where it is acceptable.");
-			Console.WriteLine("Tip: Most enum options will also accept a decimal value.");
+		void PrintTips()
+        {
+			string[] tips =
+			{
+				"All scheme settings are case-insensitive, so --AquaSheep and --aquasheep will be recognized as the same option.",
+				"Value 'null' has the same meaning as 'default', where it is acceptable.",
+				"Most enum options will also accept a decimal value.",
+				"You can pass the 'inf' value to a weapon ammo option.",
+			};
+
+			Console.WriteLine();
+			foreach (var t in tips)
+				Console.WriteLine("Tip: " + t);
 		}
 
 		void PrintOptionsHelp(IEnumerable<OptionHandler> handlers, string text)
@@ -62,6 +74,16 @@ namespace Neoschemed
 					+ (handler.Description == null ? "" : " - " + handler.Description));
 			}
 		}
+
+		void PrintWeaponsHelp()
+        {
+			Console.Write("\nWeapons:\n");
+
+			foreach (var w in Enum.GetValues(typeof(Weapon)))
+            {
+				Console.WriteLine("    --" + w.ToString() + "(Ammo|Delay|Power|Prob) [decimal]");
+            }
+        }
 
 		public void HandleArgs(string[] args)
         {
