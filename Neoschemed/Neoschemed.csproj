@@ -3,6 +3,9 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Company>themassacre dot org</Company>
+    <Authors>medvedx64</Authors>
+    <Version>1.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
